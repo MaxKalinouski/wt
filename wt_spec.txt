@@ -1,0 +1,22 @@
+Woodbridge Travel 
+
+Goal: provide a platform for the Harvard international community to easily 
+connect with each other in order to organize trips and hosting.
+
+How?
+Functionality:
+
+Minimum: 
+
+1) login page 
+2) registration page
+3) verification page (+delete after 15 mins) 
+4) main (home) page
+ 4.1 Chart of possible of hosters (sql db): Name, Location, Email, Dates,
+ Type (host, hang out, tour etc. )
+ 4.2 personal hosting 
+5) Offer page: update, new offer, delete
+6) Settings: change email address, other information
+ 
+ 
+ Medium:
