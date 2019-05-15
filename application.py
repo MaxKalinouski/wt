@@ -155,6 +155,9 @@ def buy():
     else:
         return render_template("buy.html")
 
+@app.route("/job-search", methods=["GET"])
+def search():
+    return render_template("job_search.html")
 
 @app.route("/check", methods=["GET"])
 def check():
