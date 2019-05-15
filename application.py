@@ -103,7 +103,7 @@ def buy():
 
 @app.route("/job-search", methods=["GET"])
 def search():
-    return render_template("job_search.html")
+    return render_template("job-search.html")
 
 @app.route("/check", methods=["GET"])
 def check():
