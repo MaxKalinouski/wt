@@ -48,31 +48,31 @@ def index():
     # Show the list of hosts
     if request.method == "GET":
         # the list of hosters
-        usersReal = db.execute("SELECT * FROM users")
+        hosters = db.execute("SELECT * FROM users")
         # Get all the information about the user himself
         you = db.execute("SELECT * FROM users WHERE id = :id", id=session["user_id"])
-        you[0]["location"] = "Not in Annenberg"
-        your_table = db.execute("SELECT location FROM users WHERE id = :id", id=session["user_id"])
-        
-        if your_table[0]["location"] is not None:
-
+        #you[0]["location"] = "Not in Annenberg"
+        # it was your_table before -> your_hostings 
+        your_hostings = db.execute("SELECT location FROM users WHERE id = :id", id=session["user_id"])
+        if your_hostings[0]["location"] is not None:
+            # information about your hostings
             you = db.execute("SELECT * FROM users WHERE id = :id", id=session["user_id"])
 
-    # Let user manually leave Annenberg with a button
+    # Let the user cancel his host offering
     else:
         if request.form.get("b1") == "1":
             db.execute("UPDATE users SET location = NULL, time = NULL WHERE id = :id", id=session["user_id"])
             return redirect("/")
 
-    return render_template("index.html", users=usersReal, you=you)
+    return render_template("index.html", users=hosters, you=you)
 
 # takes care of registering the users' hosting offers
-@app.route("/buy", methods=["GET", "POST"])
+@app.route("/new_hosting", methods=["GET", "POST"])
 @login_required
-def buy():
-    # Enter table number
+def new_hosting():
+
     if request.method == "POST":
-        # Get table from form input
+        # Get the specifics of the hosting from the input
         location = request.form.get("location")
         start = request.form.get("start")
         end = request.form.get("end")
@@ -99,7 +99,7 @@ def buy():
 
     # If the method is GET, return offer to host page
     else:
-        return render_template("buy.html")
+        return render_template("new_hosting.html")
 
 @app.route("/job-search", methods=["GET"])
 def search():
@@ -264,35 +264,35 @@ def verifyAgain():
         return render_template("verify_again.html")
 
 
-@app.route("/sell", methods=["GET", "POST"])
-@login_required
-def sell():
-    # Add friend
-    if request.method == "POST":
-        # Get friend's username
-        friendname = request.form.get("friendname")
-        if not friendname:
-            return apology("must provide friend's username", 400)
-        friendid = db.execute("SELECT id FROM users WHERE username = :name", name=friendname)
-        if not friendid:
-            return apology("Sorry, this friend does not exist!")
+# @app.route("/sell", methods=["GET", "POST"])
+# @login_required
+# def sell():
+#     # Add friend
+#     if request.method == "POST":
+#         # Get friend's username
+#         friendname = request.form.get("friendname")
+#         if not friendname:
+#             return apology("must provide friend's username", 400)
+#         friendid = db.execute("SELECT id FROM users WHERE username = :name", name=friendname)
+#         if not friendid:
+#             return apology("Sorry, this friend does not exist!")
 
-        # Get friend's id, and check if the users are already friends
-        other = db.execute("SELECT * FROM friends WHERE userid1 = :userID", userID=session["user_id"])
-        for elem in other:
-            if elem["userid2"] == friendid[0]["id"]:
-                return apology("Sorry, you are already friends!")
-        other2 = db.execute("SELECT * FROM friends WHERE userid2 = :userID", userID=session["user_id"])
-        for elem in other2:
-            if elem["userid1"] == friendid[0]["id"]:
-                return apology("Sorry, you are already friends!")
-        # Insert the two new friends' ids into a database that keeps track of friends
-        db.execute("INSERT INTO friends (userid1, userid2) VALUES (:userid1,:userid2)",
-                   userid1=session["user_id"], userid2=friendid[0]["id"])
-        return redirect("/")
+#         # Get friend's id, and check if the users are already friends
+#         other = db.execute("SELECT * FROM friends WHERE userid1 = :userID", userID=session["user_id"])
+#         for elem in other:
+#             if elem["userid2"] == friendid[0]["id"]:
+#                 return apology("Sorry, you are already friends!")
+#         other2 = db.execute("SELECT * FROM friends WHERE userid2 = :userID", userID=session["user_id"])
+#         for elem in other2:
+#             if elem["userid1"] == friendid[0]["id"]:
+#                 return apology("Sorry, you are already friends!")
+#         # Insert the two new friends' ids into a database that keeps track of friends
+#         db.execute("INSERT INTO friends (userid1, userid2) VALUES (:userid1,:userid2)",
+#                   userid1=session["user_id"], userid2=friendid[0]["id"])
+#         return redirect("/")
 
-    else:
-        return render_template("sell.html")
+    # else:
+    #     return render_template("sell.html")
 
 
 @app.route("/change", methods=["GET", "POST"])
