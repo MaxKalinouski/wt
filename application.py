@@ -99,11 +99,9 @@ def index():
 
 
         # # Create list of friends in Annenberg at the moment
-        # usersReal = []
+        usersReal = db.execute("SELECT * FROM users")
         # for num in friends:
-        #     temp = db.execute("SELECT * FROM users WHERE id = :userID", userID=num)
-        #     if temp[0]["tab"] is not None:
-        #         usersReal.append(temp[0])
+ 
 
 
         # Get all the information about the user himself
@@ -122,7 +120,7 @@ def index():
 
     return render_template("index.html", users=usersReal, you=you)
 
-
+# takes care of registering the users' hosting offers
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
 def buy():
