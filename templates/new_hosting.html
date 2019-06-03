@@ -26,7 +26,7 @@
         <div class="spinner"></div>
     </div>
     <!-- Preloader End -->
-
+    
     <!-- Header Area Starts -->
     <header class="header-area single-page">
         <div class="header-top">
@@ -44,30 +44,32 @@
                             <span></span>
                         </div>  
                         <div class="main-menu main-menu-light">
-                            <ul>
-                                <li class="active"><a href="index.html">home</a></li>
-                                <li><a href="about.html">about us</a></li>
-                                <li><a href="job-category.html">category</a></li>
-                                <li><a href="#">blog</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog-home.html">Blog Home</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact-us.html">contact</a></li>
-                                <li><a href="#">pages</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="job-search.html">Job Search</a></li>
-                                        <li><a href="job-single.html">Job Single</a></li>
-                                        <li><a href="pricing-plan.html">Pricing Plan</a></li>
-                                        <li><a href="elements.html">Elements</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-btn">
-                                    <a href="#" class="login">log in</a>
-                                    <a href="#" class="template-btn">sign up</a>
-                                </li>
-                            </ul>
+                            {% if session.user_id %}
+                                <ul>
+                                    
+                                    <li class="active"><a href="/new_hosting">Hosting</a></li>
+                                    <li class="active"><a href="/sell">()Add a Friend</a></li>
+                                    <li class="active"><a href="/change">(settings) Change Password</a></li>
+                                    <li class="active"><a href="/job-search">Test</a></li>
+                                    <li class="active"><a href="/logout">Log Out</a></li>
+                                    
+                                    <!--HOW TO MAKE A SUBMENU-->
+                                    <!--<li><a href="#">blog</a>-->
+                                    <!--    <ul class="sub-menu">-->
+                                    <!--        <li><a href="blog-home.html">Blog Home</a></li>-->
+                                    <!--        <li><a href="blog-details.html">Blog Details</a></li>-->
+                                    <!--    </ul>-->
+                                    <!--</li>-->
+                                
+                                </ul>
+                            
+                            {% else %}
+                                <ul class="navbar-nav ml-auto mt-2">
+                                    <li class="active"><a href="/register">Register</a></li>
+                                    <li class="active"><a href="/login">Log In</a></li>
+                                </ul>
+                            {% endif %}
+                            
                         </div>
                     </div>
                 </div>
@@ -77,14 +79,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 offset-md-3">
-                        <h2>Contact Us</h2>
-                        <p>There spirit beginning bearing the open at own every give appear in third you sawe two boys</p>
+                        <h2>Woodbridge Travel</h2>
+                        <p>insert text</p>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    <!-- Header Area End -->
 
     <!-- Map Area Starts -->
     <section class="map-area section-padding">
