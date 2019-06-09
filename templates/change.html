@@ -27,15 +27,14 @@
     </div>
     <!-- Preloader End -->
 
-        <!-- Header Area Starts -->
-    <br>
+    <!-- Header Area Starts -->
     <header class="header-area single-page">
         <div class="header-top">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo-area">
-                            <a href="index.html"><img src="static/images/logo-light.png" alt="logo"></a>
+                            <a href="/"><img src="static/images/logo-light.png" alt="logo"></a>
                         </div>
                     </div>
                     <div class="col-lg-10">
@@ -47,20 +46,11 @@
                         <div class="main-menu main-menu-light">
                             {% if session.user_id %}
                                 <ul>
-                                    
-                                    <li class="active"><a href="/new_hosting">Hosting</a></li>
-                                    <li class="active"><a href="/sell">()Add a Friend</a></li>
+         
+                                    <li class="active"><a href="/new_hosting"> Offer to Host </a></li>
                                     <li class="active"><a href="/change">(settings) Change Password</a></li>
                                     <li class="active"><a href="/logout">Log Out</a></li>
                                     
-                                    <!--HOW TO MAKE A SUBMENU-->
-                                    <!--<li><a href="#">blog</a>-->
-                                    <!--    <ul class="sub-menu">-->
-                                    <!--        <li><a href="blog-home.html">Blog Home</a></li>-->
-                                    <!--        <li><a href="blog-details.html">Blog Details</a></li>-->
-                                    <!--    </ul>-->
-                                    <!--</li>-->
-                                
                                 </ul>
                             
                             {% else %}
@@ -80,12 +70,24 @@
                 <div class="row">
                     <div class="col-md-6 offset-md-3">
                         <h2>Woodbridge Travel</h2>
-                        <p>insert text</p>
+                        <p>Find friends at Harvard to travel with! </p>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+    
+    <body>
+        {% if get_flashed_messages() %}
+            <header>
+                <div class="alert alert-primary border text-center" role="alert">
+                    {{ get_flashed_messages() | join(" ") }}
+                </div>
+            </header>
+        {% endif %}
+    </body>
+    <!-- Header Area End -->
+    
 
     <!-- Contact Form Starts -->
     <section class="contact-form section-padding3">
