@@ -71,7 +71,7 @@ def index():
 @login_required
 def edit():
     # Show your hosting
-   if request.method == "POST":
+    if request.method == "POST":
         # Get the specifics of the hosting from the input
         location = request.form.get("location")
         start = request.form.get("start")
@@ -98,10 +98,8 @@ def edit():
         return redirect("/")
 
     # If the method is GET, return offer to host page
-   else:
-        username = request.args.get("username")
-        loc = db.execute("SELECT location FROM users WHERE username = :name", name=username.lower())
-        return render_template("edit.html", loc=loc)
+    else:
+        return render_template("edit.html")
         
 
 # takes care of registering the users' hosting offers
