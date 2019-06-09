@@ -19,4 +19,11 @@ Minimum:
 6) Settings: change email address, other information
  
  
+ 
+ Implemenation: 
+  2 tables in one database:
+  1) table for users: id (user id), username, email, fullname, hash
+  2) table for hostings: h_id (hosting id), id (user id), username, fullname,
+  email, location, start, end, type, comments
+  Comment: we had a time column before that we decided to get rid of
  Medium:

@@ -66,6 +66,44 @@ def index():
 
     return render_template("index.html", users=hosters, you=you)
 
+
+@app.route("/edit", methods=["GET", "POST"])
+@login_required
+def edit():
+    # Show your hosting
+   if request.method == "POST":
+        # Get the specifics of the hosting from the input
+        location = request.form.get("location")
+        start = request.form.get("start")
+        end = request.form.get("end")
+        type = request.form.get("type")
+        # Make sure user input is valid
+        if not location:
+            return apology("must provide location", 400)
+        if not start:
+            return apology("must provide start", 400)
+        if not end:
+            return apology("must provide end", 400)
+        if not type:
+            return apology("must provide type", 400)            
+        x = db.execute("UPDATE users SET location = :location WHERE id = :userid",
+                       userid=session["user_id"], location=location)
+        y = db.execute("UPDATE users SET start = :start WHERE id = :userid",
+                       userid=session["user_id"], start = start)
+        z = db.execute("UPDATE users SET end = :end WHERE id = :userid",
+                       userid=session["user_id"], end = end)
+        i = db.execute("UPDATE users SET type = :type WHERE id = :userid",
+                       userid=session["user_id"], type = type)
+        # Redirect user to home page
+        return redirect("/")
+
+    # If the method is GET, return offer to host page
+   else:
+        username = request.args.get("username")
+        loc = db.execute("SELECT location FROM users WHERE username = :name", name=username.lower())
+        return render_template("edit.html", loc=loc)
+        
+
 # takes care of registering the users' hosting offers
 @app.route("/new_hosting", methods=["GET", "POST"])
 @login_required
